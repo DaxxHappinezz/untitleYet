@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2> This is notice page !! </h2>
+<form action="#" method="post">
+    <input type="text" placeholder="제목을 입력하세요."/>
+    <textarea placeholder="내용을 작성해 주세요."></textarea>
+    <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list}'|">목록</button>
+    <button type="button" class="modifyBtn">수정</button>
+    <button type="button" class="removeBtn">삭제</button>
+    <button type="submit" class="submitBtn">등록</button>
+</form>
+</body>
+</html>
