@@ -5,8 +5,22 @@
     <title>Title</title>
 </head>
 <body>
+<h2> This is notice list page </h2>
+
+<ul>
+  <li>
+    <a th:href="@{/}">Home</a>
+  </li>
+  <li>
+    <a th:href="@{/product/list}">상품</a>
+  </li>
+  <li>
+    <a th:href="@{/notice/list}">공지 사항</a>
+  </li>
+</ul>
+
 <button th:onclick="|location.href='@{/notice/write}'|">공지 작성</button>
-<table>
+<table border="1">
   <tr>
     <td>No</td>
     <td>Title</td>
@@ -18,7 +32,7 @@
   </tr>
   <tr th:each="notice : ${noticeList}">
     <td th:text="${notice.notice_no}">No</td>
-    <td><a th:href="@{/notice/read(notice_no = ${notice.notice_no})}" th:text="${notice.title}"></a></td>
+    <td><a th:href="@{/notice/read(notice_no = ${notice.notice_no}, page=${ph.page})}" th:text="${notice.title}"></a></td>
     <td th:text="${notice.content}">Content</td>
     <td th:text="${notice.id}">Author</td>
     <td th:text="${notice.created}">Create</td>
@@ -26,5 +40,12 @@
     <td th:text="${notice.views}">Views</td>
   </tr>
 </table>
+<div>
+  <a th:if="${ph.showPrev}" th:href="@{/notice/list(page=${ph.beginPage -1})}">&lt;</a>
+  <a th:each="i : ${#numbers.sequence(ph.beginPage, ph.endPage)}"
+     th:href="@{/notice/list(page=${i})}"
+     th:text="${i}+' '"></a>
+  <a th:if="${ph.showNext}" th:href="@{/notice/list(page=${ph.endPage +1})}">&gt;</a>
+</div>
 </body>
 </html>

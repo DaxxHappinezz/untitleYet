@@ -23,8 +23,8 @@ public class NoticeService {
     public Notice read(int notice_no) {
         return this.noticeDao.selectOne(notice_no);
     }
-    public List<Notice> getNoticeList() {
-        return this.noticeDao.selectAll();
+    public List<Notice> getNoticeList(int limit, int offset) {
+        return this.noticeDao.selectAll(limit, offset);
     }
     public int modify(Notice notice, int user_no) {
         return this.noticeDao.update(notice, user_no);
