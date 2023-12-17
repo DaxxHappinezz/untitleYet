@@ -29,6 +29,9 @@ public class NoticeService {
     public int modify(Notice notice, int user_no) {
         return this.noticeDao.update(notice, user_no);
     }
+    public void addViewCnt(int notice_no) {
+        this.noticeDao.updateViewCnt(notice_no);
+    }
     public int remove(int notice_no, int user_no) {
         return this.noticeDao.delete(notice_no, user_no);
     }

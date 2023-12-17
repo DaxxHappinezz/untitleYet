@@ -24,19 +24,15 @@
   <tr>
     <td>No</td>
     <td>Title</td>
-    <td>Content</td>
     <td>Author</td>
     <td>Create</td>
-    <td>Update</td>
     <td>Views</td>
   </tr>
   <tr th:each="notice : ${noticeList}">
     <td th:text="${notice.notice_no}">No</td>
     <td><a th:href="@{/notice/read(notice_no = ${notice.notice_no}, page=${ph.page})}" th:text="${notice.title}"></a></td>
-    <td th:text="${notice.content}">Content</td>
     <td th:text="${notice.id}">Author</td>
     <td th:text="${notice.created}">Create</td>
-    <td th:text="${notice.updated}">Update</td>
     <td th:text="${notice.views}">Views</td>
   </tr>
 </table>

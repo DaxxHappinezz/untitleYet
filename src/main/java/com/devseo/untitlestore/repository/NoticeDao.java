@@ -25,6 +25,8 @@ public interface NoticeDao {
     @Update("UPDATE notice SET title = #{notice.title}, content = #{notice.content} " +
             "WHERE notice_no = #{notice.notice_no} AND user_no = #{notice.user_no}")
     int update(@Param("notice") Notice notice, int user_no);
+    @Update("UPDATE notice SET views = views + 1 WHERE notice_no = #{notice_no}")
+    int updateViewCnt(int notice_no);
     @Delete("DELETE FROM notice WHERE notice_no = #{notice.notice_no} AND user_no = #{user_no}")
     int delete(int notice_no, int user_no);
     @Delete("TRUNCATE TABLE notice")

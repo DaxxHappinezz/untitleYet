@@ -6,13 +6,32 @@
 </head>
 <body>
 <h2> This is notice page </h2>
-<form action="#" method="post">
-    <input type="text" th:value="${notice.title}" placeholder="제목을 입력하세요."/>
-    <textarea th:text="${notice.content}" placeholder="내용을 작성해 주세요."></textarea>
-    <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">목록</button>
-    <button type="button" class="modifyBtn">수정</button>
-    <button type="button" class="removeBtn">삭제</button>
-    <button type="submit" class="submitBtn">등록</button>
-</form>
+
+<th:block th:if="${mode} == 'read'">
+    <form action="#" method="post">
+
+        <input type="text" th:value="${notice.title}"/>
+        <textarea th:text="${notice.content}"></textarea>
+        <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">목록</button>
+        <th:block th:if="${role} == 'ADM'">
+            <button type="button" class="modifyBtn">수정</button>
+            <button type="button" class="removeBtn">삭제</button>
+            <button type="submit" class="submitBtn">등록</button>
+        </th:block>
+    </form>
+</th:block>
+
+<th:block th:if="${mode} == 'write'">
+    <form th:action="@{/notice/write}" method="post">
+        <th:block th:if="${error} != null">
+            <small th:text="${error}"></small><br>
+        </th:block>
+        <input type="text" th:name="title" placeholder="제목을 입력하세요." th:value="${title != null ? title : ''}"/>
+        <textarea th:name="content" placeholder="내용을 작성해 주세요." th:text="${content != null ? content : ''}"></textarea>
+        <button type="submit" class="submitBtn">등록</button>
+        <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">취소</button>
+    </form>
+</th:block>
+
 </body>
 </html>
