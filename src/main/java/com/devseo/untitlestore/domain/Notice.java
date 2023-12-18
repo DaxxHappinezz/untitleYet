@@ -22,4 +22,10 @@ public class Notice {
         this.title = title;
         this.content = content;
     }
+
+    public Notice(int notice_no, String title, String content) {
+        this.notice_no = notice_no;
+        this.title = title;
+        this.content = content;
+    }
 }

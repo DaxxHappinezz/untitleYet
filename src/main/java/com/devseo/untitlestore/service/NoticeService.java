@@ -26,14 +26,14 @@ public class NoticeService {
     public List<Notice> getNoticeList(int limit, int offset) {
         return this.noticeDao.selectAll(limit, offset);
     }
-    public int modify(Notice notice, int user_no) {
-        return this.noticeDao.update(notice, user_no);
+    public int modify(Notice notice) {
+        return this.noticeDao.update(notice);
     }
     public void addViewCnt(int notice_no) {
         this.noticeDao.updateViewCnt(notice_no);
     }
-    public int remove(int notice_no, int user_no) {
-        return this.noticeDao.delete(notice_no, user_no);
+    public int remove(int notice_no) {
+        return this.noticeDao.delete(notice_no);
     }
     public void emptyNotice() {
         this.noticeDao.deleteAll();

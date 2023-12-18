@@ -23,12 +23,12 @@ public interface NoticeDao {
             "LIMIT #{limit} OFFSET #{offset}")
     List<Notice> selectAll(int limit, int offset);
     @Update("UPDATE notice SET title = #{notice.title}, content = #{notice.content} " +
-            "WHERE notice_no = #{notice.notice_no} AND user_no = #{notice.user_no}")
-    int update(@Param("notice") Notice notice, int user_no);
+            "WHERE notice_no = #{notice.notice_no}")
+    int update(@Param("notice") Notice notice);
     @Update("UPDATE notice SET views = views + 1 WHERE notice_no = #{notice_no}")
     int updateViewCnt(int notice_no);
-    @Delete("DELETE FROM notice WHERE notice_no = #{notice.notice_no} AND user_no = #{user_no}")
-    int delete(int notice_no, int user_no);
+    @Delete("DELETE FROM notice WHERE notice_no = #{notice.notice_no}")
+    int delete(int notice_no);
     @Delete("TRUNCATE TABLE notice")
     void deleteAll();
 }
