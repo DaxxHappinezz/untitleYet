@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2> This is login page </h2>
+<button th:onclick="|location.href='@{/}'|">Home</button>
+<form th:action="@{/login}" method="post">
+    <fieldset>
+        <legend>Welcome to back</legend>
+        <label>
+            <input type="text" name="id" placeholder="Your ID"/>
+        </label>
+        <label>
+            <input type="password" name="password" placeholder="Your Password"/>
+        </label>
+        <button type="submit" >Sign in</button>
+        <p>
+            Don't have an account?<br>
+            <a th:href="@{/join}">Create One Now</a>
+        </p>
+    </fieldset>
+</form>
+</body>
+</html>

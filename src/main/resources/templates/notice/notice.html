@@ -13,10 +13,14 @@
         <th:block th:if="${error} != null">
             <small th:text="${error}"></small><br>
         </th:block>
-        <input type="text" th:name="title" placeholder="제목을 입력하세요." th:value="${title != null ? title : ''}"/>
-        <textarea th:name="content" placeholder="내용을 작성해 주세요." th:text="${content != null ? content : ''}"></textarea>
-        <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">취소</button>
+        <label>
+            <input type="text" th:name="title" placeholder="제목을 입력하세요." th:value="${title != null ? title : ''}"/>
+        </label>
+        <label>
+            <textarea th:name="content" placeholder="내용을 작성해 주세요." th:text="${content != null ? content : ''}"></textarea>
+        </label>
         <button type="submit" class="submitBtn">등록</button>
+        <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">취소</button>
     </form>
 </th:block>
 
@@ -24,8 +28,12 @@
     <h3>mode: <span th:text="${mode}"></span></h3>
     <form action="#">
         <input type="hidden" class="noticeNo" th:name="notice_no" th:value="${notice.notice_no}"/>
-        <input type="text" th:value="${notice.title}" th:readonly="true"/>
-        <textarea th:text="${notice.content}" th:readonly="true"></textarea>
+        <label>
+            <input type="text" th:value="${notice.title}" th:readonly="true"/>
+        </label>
+        <label>
+            <textarea th:text="${notice.content}" th:readonly="true"></textarea>
+        </label>
         <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">목록</button>
         <!--        <th:block th:if="${role} == 'ADM'">-->
         <button type="button" class="modifyBtn" th:onclick="|location.href='@{/notice/modify(notice_no=${notice.notice_no}, page=${ph.page})}'|">수정</button>
@@ -43,8 +51,12 @@
         <input type="hidden" th:name="page" th:value="${ph.page}"/>
         <input type="hidden" th:name="pageSize" th:value="${ph.pageSize}"/>
         <input type="hidden" class="noticeNo" th:name="notice_no" th:value="${notice.notice_no}"/>
-        <input type="text" th:name="title" th:value="${notice.title}"/>
-        <textarea th:name="content" th:text="${notice.content}"></textarea>
+        <label>
+            <input type="text" th:name="title" th:value="${notice.title}"/>
+        </label>
+        <label>
+            <textarea th:name="content" th:text="${notice.content}"></textarea>
+        </label>
         <button type="button" class="listBtn" th:onclick="|location.href='@{/notice/list(page=${ph.page})}'|">목록</button>
         <!--        <th:block th:if="${role} == 'ADM'">-->
         <button type="submit" class="submitBtn">저장</button>

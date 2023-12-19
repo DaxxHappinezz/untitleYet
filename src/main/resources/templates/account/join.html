@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2> This is join page </h2>
+<form th:action="@{/join}" method="post">
+    <fieldset>
+        <legend>Create an Account.</legend>
+        <label>
+            <span>Id</span>
+            <input type="text" name="id" placeholder="ID" th:required>
+        </label>
+        <br>
+        <label>
+            <span>Password</span>
+            <input type="password" name="password" placeholder="Password" th:required/>
+        </label>
+        <br>
+        <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Name" th:required/>
+        </label>
+        <br>
+        <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="Email" th:required/>
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" name="subscribe" value="true"/>
+            Receive emails about new products, sales and store events.
+        </label>
+        <br>
+        <button type="submit">Create Account</button>
+        <button type="button" th:onclick="|location.href='@{/login}'|">Back</button>
+    </fieldset>
+</form>
+</body>
+</html>
