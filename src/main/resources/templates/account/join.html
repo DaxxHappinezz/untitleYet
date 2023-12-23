@@ -1,42 +1,588 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kalnia:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style type="text/css">
+    :root {
+      --color-title: #393a3c;
+      --color-desc: #1f5dde;
+      --color-highlight: #1f22de;
+      --color-input-text: #7a7a7a;
+      --color-background-border: #aaa;
+      --color-white: white;
+      --color-violet: #5b1fde;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-family: "Nanum Gothic", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .hide {
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden;
+      margin: -1px;
+      border: 0 none !important;
+      text-indent: -9999px;
+      position: absolute;
+    }
+
+    /* Common */
+    html,
+    body {
+      width: 100%;
+      min-width: 1280px;
+      display: flex;
+      position: relative;
+    }
+
+    /* Background and Logo */
+    .left {
+      width: 60%;
+      min-height: 100%;
+      background: url(/image/img_background.jpg) no-repeat;
+      background-size: cover;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      display: block;
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: "Kalnia", serif;
+      color: var(--color-input-text);
+      text-align: center;
+    }
+
+    .logo {
+      display: block;
+      width: 104px;
+      margin: 0 auto;
+    }
+
+    /* Form */
+    form {
+      width: 50%;
+      height: 100%;
+      padding: 48px;
+      box-sizing: border-box;
+      background-color: var(--color-white);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+
+    caption {
+      width: 100%;
+      line-height: 50px;
+    }
+
+    table {
+      width: 100%;
+      margin: 0 auto;
+      border-collapse: separate;
+      border-spacing: 0 16px;
+    }
+
+    tr {
+      width: 100%;
+      height: 50px;
+      margin: 0 auto;
+      line-height: inherit;
+      position: relative;
+    }
+
+    th {
+      display: inline-block;
+      width: 28%;
+      text-align: left;
+      color: var(--color-title);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    th .choice {
+      color: var(--color-desc);
+    }
+
+    th .require {
+      display: none;
+    }
+
+    td {
+      width: 70%;
+      display: inline-block;
+    }
+
+    td .inp_box {
+      margin-bottom: 8px;
+    }
+
+    input,
+    .sel_base {
+      width: 100%;
+      height: 40px;
+      padding: 0.7em;
+      box-sizing: border-box;
+      background-color: rgba(187, 185, 185, 0.5);
+      border: 0 none;
+      border-radius: 15px;
+      font-size: 0.875rem;
+      position: relative;
+    }
+
+    /* Input */
+    input:focus {
+      outline: none;
+      border-color: black;
+      box-shadow: 0 0 5px rgba(31, 93, 222, 0.5);
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      color: var(--color-input-text);
+    }
+
+    input[type="date"] {
+      color: var(--color-input-text);
+    }
+
+    /* Id, Pwd -  noti */
+    .noti div {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .noti.id_noti,
+    .noti.pwd_noti,
+    .noti.tel_noti {
+      position: absolute;
+      top: 46px;
+      color: var(--color-desc);
+      font-size: 12px !important;
+    }
+
+    /* Postal */
+    .btn_type2_s {
+      display: block;
+      width: 100%;
+      height: 40px;
+      /* position: absolute;
+      top: 5px;
+      right: 18px; */
+      color: white;
+      background-color: rgba(187, 185, 185);
+      border: 0 none;
+      border-radius: 15px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.75em;
+      line-height: 40px;
+    }
+
+    .btn_type2_s:hover {
+      border: 1px solid var(--color--highlight);
+      border-style: dotted;
+      box-sizing: border-box;
+    }
+
+    .d_flex {
+      display: flex;
+      gap: 8px;
+    }
+
+    .inp_box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    /* BTN - Submit */
+    .btnSubmit {
+      width: 100%;
+      height: 50px;
+      background-color: rgba(187, 185, 185, 0.5);
+      border: var(--color-button-back);
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .btnSubmit:hover {
+      font-weight: 700;
+      color: var(--color-white);
+      background-color: var(--color-button-back);
+    }
+
+    @media screen and (max-width: 992px) {
+      * {
+        font-size: 0.9rem;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .left {
+        display: none;
+      }
+
+      form {
+        width: 100%;
+        padding: 80px 40px;
+        box-sizing: border-box;
+      }
+
+      table {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      tr {
+        height: 32px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<h2> This is join page </h2>
-<form th:action="@{/join}" method="post">
-    <fieldset>
-        <legend>Create an Account.</legend>
-        <label>
-            <span>Id</span>
-            <input type="text" name="id" placeholder="ID" th:required>
-        </label>
-        <br>
-        <label>
-            <span>Password</span>
-            <input type="password" name="password" placeholder="Password" th:required/>
-        </label>
-        <br>
-        <label>
-            <span>Name</span>
-            <input type="text" name="name" placeholder="Name" th:required/>
-        </label>
-        <br>
-        <label>
-            <span>Email</span>
-            <input type="email" name="email" placeholder="Email" th:required/>
-        </label>
-        <br>
-        <label>
-            <input type="checkbox" name="subscribe" value="true"/>
-            Receive emails about new products, sales and store events.
-        </label>
-        <br>
-        <button type="submit">Create Account</button>
-        <button type="button" th:onclick="|location.href='@{/login}'|">Back</button>
-    </fieldset>
-</form>
+  <div class="left">
+  </div>
+  <form action="/join" method="post" name="frmWrite" onsubmit="return formCheck(this);">
+    <div class="frmWrite_inner">
+      <h1>
+        <img src="/image/LOGO.png" class="logo" alt="MIA"> MUSIC IS EVERYWHERE
+      </h1>
+    </div>
+    <table class="tbl_write">
+      <caption class="hide">회원가입</caption>
+      <tbody>
+        <!-- 아이디 -->
+        <tr>
+          <th scope="row">
+            <label for="userID">ID</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="text" id="userID" name="id" minlength="4" maxlength="16" placeholder="Enter your ID"
+                class="inp_base">
+            </div>
+            <div class="noti id_noti">
+              <div class="success-messageId hide">&#42; 사용할 수 있는 아이디입니다</div>
+              <div class="failure-messageId1 hide">&#42; 아이디는 4~16글자이어야 합니다</div>
+              <div class="failure-messageId2 hide">&#42; 영어 또는 숫자만 가능합니다</div>
+            </div>
+          </td>
+        </tr>
+        <!-- 비밀번호 -->
+        <tr>
+          <th scope="row">
+            <label for="userPassword">PASSWORD</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="password" id="userPassword" name="password" maxlength="16"
+                placeholder="Enter your password" autocomplete="on" class="inp_base" />
+            </div>
+            <div class="noti pwd_noti">
+              <div class="success-messagePwd hide">&#42; 사용할 수 있는 비밀번호입니다</div>
+              <div class="failure-messagePwd1 hide">&#42; 비밀번호는 4~16글자이어야 합니다</div>
+              <div class="failure-messagePwd2 hide">&#42; 영어 또는 숫자만 가능합니다</div>
+            </div>
+          </td>
+        </tr>
+        <!-- 비밀번호 확인 -->
+        <tr>
+          <th scope="row">
+            <label for="confirmUserPassword">PASSWORD CONFIRM</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="password" id="confirmUserPassword" name="confirmPwd" maxlength="16"
+                placeholder="Enter your password" autocomplete="on" class="inp_base" />
+            </div>
+            <div class="noti pwd_noti">
+              <div class="success-messagepw hide">&#42; 사용할 수 있는 비밀번호입니다</div>
+              <div class="failure-message1pw hide">&#42; 비밀번호는 4~16글자이어야 합니다</div>
+              <div class="failure-message2pw hide">&#42; 영어 또는 숫자만 가능합니다</div>
+            </div>
+          </td>
+        </tr>
+        <!-- 이메일 -->
+        <tr>
+          <th scope="row">
+            <label for="customerEmail">E-mail</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="text" id="customerEmail" name="email" maxlength="80"
+                placeholder="Enter your Email address" class="inp_base">
+            </div>
+          </td>
+        </tr>
+        <!-- 이름 -->
+        <tr>
+          <th scope="row">
+            <label for="customerName">FULL NAME</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="text" id="customerName" name="name" maxlength="30" placeholder="e.g.Jade Murphy"
+                class="inp_base" />
+            </div>
+          </td>
+        </tr>
+        <!-- 생년월일 -->
+        <tr>
+          <th scope="row">
+            <label for="customerBirth">BIRTH</label>
+            <span class="choice">(선택)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="date" id="customerBirth" name="birth" class="inp_base">
+            </div>
+          </td>
+        </tr>
+        <!-- 퓨대폰 번호 -->
+        <tr>
+          <th scope="row">
+            <label for="userTel">PHONE NUMBER</label>
+            <span class="require">(필수)</span>
+          </th>
+          <td>
+            <div class="inp_box">
+              <input type="text" id="userTel" name="phone" maxlength="12" placeholder="Enter your Phone Number"
+                class="inp_base" />
+            </div>
+            <div class="noti tel_noti">
+              <div class="failure-messageTel hide">&#42; 숫자만 입력 가능합니다</div>
+            </div>
+          </td>
+        </tr>
+        <!-- 주소 -->
+        <tr>
+          <th scope="row">
+            <span class="label">ADDRESS</span>
+            <span class="choice">(선택)</span>
+          </th>
+          <td class="address_box">
+            <div class="d_flex">
+              <div class="inp_box">
+                <input type="text" id="addrFirst" class="inp_base" title="우편 번호 입력" readonly placeholder="우편 번호"
+                  name="addrBase">
+              </div>
+              <a href="#none" class="btn_type2_s" id="btn_zipcode">우편 번호 검색</a>
+            </div>
+            <div class="inp_box mt">
+              <input type="text" name="fullAddress" class="inp_base" title="상세주소 입력" maxlength="50"
+                placeholder="">
+              <input type="text" name="extraAddress" class="inp_base" title="상세주소 입력" maxlength="50"
+                placeholder="상세 주소를 입력해 주세요.">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="agree_box">
+      <div class="tit">
+        <span class="form_wrap type2">
+          <input type="checkbox" id="isAgreeCollectPersonalInformationYn" name="privacy"
+            value="true" />
+          <label for="isAgreeCollectPersonalInformationYn" role="checkbox">개인정보 수집·이용에 동의합니다.
+            <span class="require">(필수)</span>
+          </label><br>
+          <input type="checkbox" id="isSubscribe" name="subscribe" value=true />
+          <label for="isSubscribe" role="checkbox">이메일로 새로운 소식을 받는 것에 동의합니다.
+            <span class="require">(선택)</span>
+          </label>
+        </span>
+      </div>
+    </div>
+    <button type="submit" class="btnSubmit" id="btnSubmit">가입</button>
+  </form>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    // 회원 가입 유효성 검사 - 변수
+    const button = document.getElementById("btnSubmit");
+    const id = document.getElementById("userID");
+    let idSuccessMessage = document.querySelector(".success-messageId");
+    let idFailureMessageOne = document.querySelector(".failure-messageId1");
+    let idFailureMessageTwo = document.querySelector(".failure-messageId2");
+
+    const pwd = document.getElementById("userPassword");
+    let pwdSuccessMessage = document.querySelector(".success-messagepw");
+    let pwdFailureMessageOne = document.querySelector(".failure-messagePwd1");
+    let pwdFailureMessageTwo = document.querySelector(".failure-messagePwd2");
+
+    const phone = document.getElementById("userTel");
+    let telFailureMessageOne = document.querySelector('.failure-messageTel');
+
+    // 회원 가입 유효성 검사 - 함수
+    function validateID() {
+      const idValue = id.value.trim(); // 앞뒤 공백 제거
+
+      // 1. default는 아무 경고창도 띄우지 않음
+
+      // 2. 사용자가 key up을 했는데 4글자 이하 16글자 이상이면 경고창을 띄움
+      if (idValue.length < 4 || idValue.length > 16) {
+        idSuccessMessage.classList.add("hide");
+        idFailureMessageOne.classList.remove("hide");
+        idFailureMessageTwo.classList.add("hide");
+        return false;
+      } else {
+        idSuccessMessage.classList.remove("hide");
+        idFailureMessageOne.classList.add("hide");
+        idFailureMessageTwo.classList.add("hide");
+      }
+
+      // 3. 4글자 이상 16글자 이하인데 사용자가 한글을 사용하면 경고창을 띄움
+      if (/[^a-zA-Z0-9]/.test(idValue)) {
+        idSuccessMessage.classList.add("hide");
+        idFailureMessageOne.classList.add("hide");
+        idFailureMessageTwo.classList.remove("hide");
+        return false;
+      } else {
+        idSuccessMessage.classList.remove("hide");
+        idFailureMessageOne.classList.add("hide");
+        idFailureMessageTwo.classList.add("hide");
+      }
+
+      // 4. 4글자 이상 16글자 이하이며, 영어와 숫자만 사용했을 때 다음 항목으로 넘어감
+      return true;
+    }
+
+    function validatePWD() {
+      const pwdValue = pwd.value.trim(); // 앞뒤 공백 제거
+
+      // 1. default는 아무 경고창도 띄우지 않음
+
+      // 2. 사용자가 key up을 했는데 4글자 이하 16글자 이상이면 경고창을 띄움
+      if (pwdValue.length < 4 || pwdValue.length > 16) {
+        pwdSuccessMessage.classList.add("hide");
+        pwdFailureMessageOne.classList.remove("hide");
+        pwdFailureMessageTwo.classList.add("hide");
+        return false;
+      } else {
+        pwdSuccessMessage.classList.remove("hide");
+        pwdFailureMessageOne.classList.add("hide");
+        pwdFailureMessageTwo.classList.add("hide");
+      }
+
+      // 3. 4글자 이상 16글자 이하인데 사용자가 한글을 사용하면 경고창을 띄움
+      if (/[^a-zA-Z0-9]/.test(pwdValue)) {
+        pwdSuccessMessage.classList.add("hide");
+        pwdFailureMessageOne.classList.add("hide");
+        pwdFailureMessageTwo.classList.remove("hide");
+        return false;
+      } else {
+        pwdSuccessMessage.classList.remove("hide");
+        pwdFailureMessageOne.classList.add("hide");
+        pwdFailureMessageTwo.classList.add("hide");
+      }
+
+      // 4. 4글자 이상 16글자 이하이며, 영어와 숫자만 사용했을 때 다음 항목으로 넘어감
+      return true;
+    }
+
+    id.addEventListener("keyup", validateID);
+    pwd.addEventListener("keyup", validatePWD);
+
+    // 회원 가입 유효성 검사
+    // button.addEventListener("click", function checkValidity() {
+    //   if (!validateID()) {
+    //     alert("Enter your correct ID");
+    //     return false;
+    //   }
+    //
+    //   if (!validatePWD()) {
+    //     alert("Enter your correct PASSWORD");
+    //     return false;
+    //   }
+    //   alert("Enroll Success🙂")
+    // });
+
+    function formCheck() {
+      if (!validateID()) {
+        alert("Enter your correct ID");
+        return false;
+      }
+
+      if (!validatePWD()) {
+        alert("Enter your correct PASSWORD");
+        return false;
+      }
+      alert("Enroll Success🙂")
+      return true;
+    }
+
+    // 우편 번호 검색
+    const btnZipCode = document.getElementById('btn_zipcode');
+    btnZipCode.addEventListener('click', () => {
+      new daum.Postcode({
+        oncomplete: function (data) {
+          let fullAddr = '';
+          let extraAddr = '';
+
+          if (data.userSelectedType === 'R') {
+            fullAddr = data.roadAddress;
+          } else {
+            fullAddr = data.jibunAddress;
+          }
+
+          if (data.userSelectedType === "R") {
+            if (data.bname !== '') {
+              extraAddr += data.bname
+            }
+            if (data.buildingName !== '') {
+              extraAddr += (extraAddr !== '' ? ',' + data.buildingName : data.buildingName)
+            }
+
+            fullAddr += (extraAddr !== '' ? '(' + extraAddr + ')' : '')
+
+            document.frmWrite.fullAddress.value = fullAddr
+            document.frmWrite.addrBase.value = data.zonecode;
+            // console.log(zipcode.value)
+          }
+        }
+      }).open();
+    })
+
+  </script>
 </body>
+
 </html>

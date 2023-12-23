@@ -9,7 +9,12 @@
 <h3>
     notice count : <span th:text="${notice_cnt}"></span>
 </h3>
-<a th:href="@{/login}">Sign in</a>
+<span th:if="${session.login != true}">
+    <a th:href="@{/login}">Sign in</a>
+</span>
+<span th:if="${session.login == true}">
+    <a th:href="@{/logout}">Sign out</a>
+</span>
 <ul>
     <li>
         <a th:href="@{/}">Home</a>

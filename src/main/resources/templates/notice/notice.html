@@ -7,6 +7,13 @@
 <body>
 <h2> This is notice page </h2>
 
+<span th:if="${session.login != true}">
+    <a th:href="@{/login}">Sign in</a>
+</span>
+<span th:if="${session.login == true}">
+    <a th:href="@{/logout}">Sign out</a>
+</span>
+
 <th:block th:if="${mode} == 'write'">
     <h3>mode: <span th:text="${mode}"></span></h3>
     <form th:action="@{/notice/write}" method="post">

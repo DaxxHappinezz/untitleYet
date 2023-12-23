@@ -18,6 +18,15 @@ public class JoinController {
         return "account/join";
     }
 
+//    @PostMapping("/join")
+//    public String registration(User user) {
+//        System.out.println(user);
+//        int rowCnt = this.userDao.insert(user);
+//        if(rowCnt == 1) {
+//            return "redirect:/";
+//        }
+//        return "redirect:/join";
+//    }
     @PostMapping("/join")
     public String registration(User user) {
         System.out.println(user);
